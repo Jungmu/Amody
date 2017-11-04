@@ -22,27 +22,27 @@ void ACharacterBase::BeginPlay()
 void ACharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	float moveY = InputComponent->GetAxisValue("MoveY");
+	/*float moveY = InputComponent->GetAxisValue("MoveY");
 	float moveX = InputComponent->GetAxisValue("MoveX");
 
 	FRotator rotator = UKismetMathLibrary::MakeRotFromX(FVector(moveX, moveY, 0.f));
 
-	SetActorRotation(rotator);
+	SetActorRotation(rotator);*/
 }
 
-// Called to bind functionality to input
+ //Called to bind functionality to input
 void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	InputComponent->BindAxis("MoveY", this, &ACharacterBase::MoveForward);
-	InputComponent->BindAxis("MoveX", this, &ACharacterBase::MoveForward);
+	//InputComponent->BindAxis("MoveY", this, &ACharacterBase::MoveForward);
+	//InputComponent->BindAxis("MoveX", this, &ACharacterBase::MoveForward);
 }
-
-void ACharacterBase::MoveForward(float amount) 
-{
-	if (Controller && amount)
-	{		
-		AddMovementInput(GetActorForwardVector(),FMath::Abs(amount)*MoveSpeed*FApp::GetDeltaTime());
-	}
-	
-}
+//
+//void ACharacterBase::MoveForward(float amount) 
+//{
+//	if (Controller && amount)
+//	{		
+//		AddMovementInput(GetActorForwardVector(),FMath::Abs(amount)*MoveSpeed*FApp::GetDeltaTime());
+//	}
+//	
+//}

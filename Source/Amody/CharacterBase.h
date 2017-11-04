@@ -26,7 +26,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void MoveForward(float amount);
+	//void MoveForward(float amount);
 
 	UPROPERTY(EditAnywhere)
 		float MoveSpeed = 100;
