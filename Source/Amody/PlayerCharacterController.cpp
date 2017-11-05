@@ -6,17 +6,6 @@
 void APlayerCharacterController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	GetInputTouchState(ETouchIndex::Touch1, touchX, touchY, bIsTouchPressed);
-
-	if (bIsTouchPressed)
-	{
-		
-	}
-	else
-	{
-
-	}
 }
 
 
@@ -24,5 +13,4 @@ void APlayerCharacterController::Tick(float DeltaTime)
 void APlayerCharacterController::BeginPlay()
 {
 	Super::BeginPlay();
-
 }

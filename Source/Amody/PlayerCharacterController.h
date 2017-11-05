@@ -19,18 +19,5 @@ protected:
 
 public:
 	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	UPROPERTY(EditAnywhere)
-	float touchX;
-
-	UPROPERTY(EditAnywhere)
-	float touchY;
-
-	UPROPERTY(EditAnywhere)
-	bool bIsTouchPressed;
-
-	UPROPERTY(EditAnywhere)
-	UTouchInterface* joyStick;
-	
+	virtual void Tick(float DeltaTime) override;	
 };

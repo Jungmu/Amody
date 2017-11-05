@@ -16,33 +16,45 @@ void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	lastUpdateTime = FApp::GetCurrentTime();
 }
 
 // Called every frame
 void ACharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	/*float moveY = InputComponent->GetAxisValue("MoveY");
-	float moveX = InputComponent->GetAxisValue("MoveX");
 
-	FRotator rotator = UKismetMathLibrary::MakeRotFromX(FVector(moveX, moveY, 0.f));
+	if (lastUpdateTime+1 < FApp::GetCurrentTime())
+	{
+		lastUpdateTime = FApp::GetCurrentTime();
+		/*if (playerStats.hp < noneSaveStats.hpMax)
+		{
+			if (playerStats.hp + noneSaveStats.hpRecoveryForSecond > noneSaveStats.hpMax)
+			{
+				playerStats.hp = noneSaveStats.hpMax;
+			}
+			else
+			{
+				playerStats.hp = playerStats.hp + noneSaveStats.hpRecoveryForSecond;
+			}
+		}
+		if (playerStats.mp < noneSaveStats.mpMax)
+		{
+			if (playerStats.mp + noneSaveStats.mpRecoveryForSecond > noneSaveStats.mpMax)
+			{
+				playerStats.mp = noneSaveStats.mpMax;
+			}
+			else
+			{
+				playerStats.mp = playerStats.mp + noneSaveStats.mpRecoveryForSecond;
+			}
+		}*/
+	}	
 
-	SetActorRotation(rotator);*/
 }
 
  //Called to bind functionality to input
 void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	//InputComponent->BindAxis("MoveY", this, &ACharacterBase::MoveForward);
-	//InputComponent->BindAxis("MoveX", this, &ACharacterBase::MoveForward);
 }
-//
-//void ACharacterBase::MoveForward(float amount) 
-//{
-//	if (Controller && amount)
-//	{		
-//		AddMovementInput(GetActorForwardVector(),FMath::Abs(amount)*MoveSpeed*FApp::GetDeltaTime());
-//	}
-//	
-//}
