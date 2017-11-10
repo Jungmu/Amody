@@ -15,42 +15,12 @@ ACharacterBase::ACharacterBase()
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	lastUpdateTime = FApp::GetCurrentTime();
 }
 
 // Called every frame
 void ACharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	if (lastUpdateTime+1 < FApp::GetCurrentTime())
-	{
-		lastUpdateTime = FApp::GetCurrentTime();
-		/*if (playerStats.hp < noneSaveStats.hpMax)
-		{
-			if (playerStats.hp + noneSaveStats.hpRecoveryForSecond > noneSaveStats.hpMax)
-			{
-				playerStats.hp = noneSaveStats.hpMax;
-			}
-			else
-			{
-				playerStats.hp = playerStats.hp + noneSaveStats.hpRecoveryForSecond;
-			}
-		}
-		if (playerStats.mp < noneSaveStats.mpMax)
-		{
-			if (playerStats.mp + noneSaveStats.mpRecoveryForSecond > noneSaveStats.mpMax)
-			{
-				playerStats.mp = noneSaveStats.mpMax;
-			}
-			else
-			{
-				playerStats.mp = playerStats.mp + noneSaveStats.mpRecoveryForSecond;
-			}
-		}*/
-	}	
-
 }
 
  //Called to bind functionality to input
