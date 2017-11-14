@@ -1,8 +1,9 @@
-// Copyright JJ 2017-
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
 #include "CoreMinimal.h"
+#include "UI_Manager.h"
 #include "GameFramework/Character.h"
 #include "CharacterBase.generated.h"
 
@@ -25,4 +26,13 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool isAttack = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		bool isUiOpen = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		AUI_Manager* uiManager;
+		
 };
