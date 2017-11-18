@@ -14,9 +14,9 @@ struct FInventorySlot
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-		AMasterItem* Item;
+		AMasterItem* Item = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
-		int amount;
+		int amount = 0;
 
 };
 
@@ -41,14 +41,14 @@ public:
 		int AmountOfSlot = 150;
 
 	// Reference UMG Asset in the Editor
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets" ,meta = (ExposeOnSpawn))
 		TSubclassOf<class UUserWidget> wMainMenu;
 
 	// Variable to hold the widget After Creating it.
 	UUserWidget* MyMainMenu;
 
 	// Reference UMG Asset in the Editor
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets" ,meta = (ExposeOnSpawn))
 		TSubclassOf<class UUserWidget> wPlayerUI;
 
 	// Variable to hold the widget After Creating it.
@@ -74,4 +74,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 		void getAmountAtIndex(int index, int &OUTamount);
+
+	UFUNCTION(BlueprintCallable, Category = "CommonUI")
+		void setVisibleMainUI();
 };
