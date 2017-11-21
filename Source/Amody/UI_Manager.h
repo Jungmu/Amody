@@ -39,6 +39,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Slot")
 		int AmountOfSlot = 150;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
+		int MaxItemCount = 99;
 
 	// Reference UMG Asset in the Editor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets" ,meta = (ExposeOnSpawn))
@@ -69,8 +71,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 		void searchFreeStack(AMasterItem* item, bool &bOUTisSuccess, int &OUTindex);
 
+	void addStackedItem(AMasterItem* item,int index, int amount, bool &bOUTisSuccess);
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-		void addItem(AMasterItem* item,int amount, bool &bOUTisSuccess, int &OUTrest);
+		void addItem(AMasterItem* item,int amount, bool &bOUTisSuccess);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 		void getAmountAtIndex(int index, int &OUTamount);

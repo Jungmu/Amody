@@ -49,9 +49,13 @@ void AUI_Manager::Tick(float DeltaTime)
 void AUI_Manager::isSlotEmpty(int index, bool &bOUTisEmpty)
 {
 	if (inventorySlot[index].amount == 0)
+	{
 		bOUTisEmpty = true;
+	}
 	else
+	{
 		bOUTisEmpty = false;
+	}
 }
 
 void AUI_Manager::getItemInfoAtIndex(int index, bool &bOUTisEmpty, FItemInfo &OUTitemInfo, int &OUTamount)
@@ -59,29 +63,122 @@ void AUI_Manager::getItemInfoAtIndex(int index, bool &bOUTisEmpty, FItemInfo &OU
 	isSlotEmpty(index, bOUTisEmpty);
 	OUTamount = inventorySlot[index].amount;
 	if (inventorySlot[index].Item)
+	{
 		OUTitemInfo = inventorySlot[index].Item->itemInfo;
+	}
 	else
+	{
 		OUTitemInfo = FItemInfo();
+	}
 }
 
 void AUI_Manager::searchEmptySlot(bool &bOUTisSuccess,int &OUTindex)
 {
-
+	for(int i = 0; i< inventorySlot.Num();i++)
+	{
+		if (inventorySlot[i].amount == 0)
+		{
+			bOUTisSuccess = true;
+			OUTindex = i;
+			return;
+		}
+	}
+	bOUTisSuccess = false;
+	OUTindex = 0;
 }
 
 void AUI_Manager::searchFreeStack(AMasterItem* item, bool &bOUTisSuccess, int &OUTindex)
 {
-
+	for (int i = 0; i < inventorySlot.Num(); i++)
+	{
+		if (inventorySlot[i].Item->itemInfo.name == item->itemInfo.name && inventorySlot[i].amount < 99)
+		{
+			bOUTisSuccess = true;
+			OUTindex = i;
+			return;
+		}
+	}
+	bOUTisSuccess = false;
+	OUTindex = 0;
 }
 
-void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess, int &OUTrest)
+void AUI_Manager::addStackedItem(AMasterItem* item, int index,int amount, bool &bOUTisSuccess)
 {
+	int rest = 0;
+	if (amount <= MaxItemCount)
+	{
+		inventorySlot[index].amount = amount;
+		bOUTisSuccess = true;
+		return;
+	}
+	else
+	{
+		inventorySlot[index].amount = MaxItemCount;
+		rest = amount - MaxItemCount;
+		addItem(item, rest, bOUTisSuccess);
+	}
+}
 
+void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
+{
+	if (amount == 0 || item == nullptr)
+	{
+		UE_LOG(LogTemp, Error, TEXT("미친 이상한 아이템을 넣으려 하지마."));
+		bOUTisSuccess = false;
+		return;
+	}
+
+	int index = 0;
+	int rest = 0;
+	bool isEmpty = false;	
+
+	if (item->itemInfo.bIsCanStack)
+	{
+		searchFreeStack(item, isEmpty, index);
+		if (isEmpty)
+		{
+			int sumAmount = inventorySlot[index].amount + amount;
+			addStackedItem(item, index, sumAmount, bOUTisSuccess);
+		}
+		else
+		{
+			searchEmptySlot(isEmpty,index);
+			if (isEmpty)
+			{
+				inventorySlot[index].Item = item;
+				addStackedItem(item, index, amount, bOUTisSuccess);
+			}
+			else
+			{
+				UE_LOG(LogTemp, Error, TEXT("인벤토리가 꽉찼어 ;;"));
+				bOUTisSuccess = false;
+				return;
+			}
+		}
+	}
+	else
+	{
+		searchEmptySlot(isEmpty, index);
+		if (isEmpty)
+		{
+			inventorySlot[index].Item = item;
+			inventorySlot[index].amount = 1;
+			amount--;
+			addItem(item, amount, bOUTisSuccess);
+		}
+		else
+		{
+			UE_LOG(LogTemp, Error, TEXT("인벤토리가 꽉찼어 ;;"));
+			bOUTisSuccess = false;
+			return;
+		}
+	}
+	bOUTisSuccess = true;
 }
 
 void AUI_Manager::getAmountAtIndex(int index, int &OUTamount)
 {
-
+	OUTamount = inventorySlot[index].amount;
 }
 
 void AUI_Manager::setVisibleMainUI() 
