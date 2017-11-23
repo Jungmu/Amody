@@ -91,12 +91,15 @@ void AUI_Manager::searchFreeStack(AMasterItem* item, bool &bOUTisSuccess, int &O
 {
 	for (int i = 0; i < inventorySlot.Num(); i++)
 	{
-		if (inventorySlot[i].Item->itemInfo.name == item->itemInfo.name && inventorySlot[i].amount < 99)
+		if (inventorySlot[i].Item)
 		{
-			bOUTisSuccess = true;
-			OUTindex = i;
-			return;
-		}
+			if (inventorySlot[i].Item->itemInfo.name == item->itemInfo.name && inventorySlot[i].amount < 99)
+			{
+				bOUTisSuccess = true;
+				OUTindex = i;
+				return;
+			}
+		}		
 	}
 	bOUTisSuccess = false;
 	OUTindex = 0;
@@ -123,7 +126,7 @@ void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
 {
 	if (amount == 0 || item == nullptr)
 	{
-		UE_LOG(LogTemp, Error, TEXT("미친 이상한 아이템을 넣으려 하지마."));
+		UE_LOG(LogTemp, Error, TEXT("can't insert wrong Item."));
 		bOUTisSuccess = false;
 		return;
 	}
@@ -150,7 +153,7 @@ void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
 			}
 			else
 			{
-				UE_LOG(LogTemp, Error, TEXT("인벤토리가 꽉찼어 ;;"));
+				UE_LOG(LogTemp, Error, TEXT("inventory is full ;;"));
 				bOUTisSuccess = false;
 				return;
 			}
@@ -168,7 +171,7 @@ void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
 		}
 		else
 		{
-			UE_LOG(LogTemp, Error, TEXT("인벤토리가 꽉찼어 ;;"));
+			UE_LOG(LogTemp, Error, TEXT("inventory is full ;;"));
 			bOUTisSuccess = false;
 			return;
 		}
