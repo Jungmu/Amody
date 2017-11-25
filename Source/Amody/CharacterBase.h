@@ -35,4 +35,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		AUI_Manager* uiManager;
 		
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FUserData userData;
+
+	UFUNCTION(BlueprintCallable, Category = "userData")
+		void getSpeed(float &OUTspeed);
+
+	UFUNCTION(BlueprintCallable, Category = "userData")
+		void getHp(float &OUThp);
+
+	UFUNCTION(BlueprintCallable, Category = "userData")
+		void setHp(float hp);
+
+	UFUNCTION(BlueprintCallable, Category = "userData")
+		void getMp(float &OUTmp);
+
+	UFUNCTION(BlueprintCallable, Category = "userData")
+		void setMp(float mp);
+
+	void setUpUserData();
 };

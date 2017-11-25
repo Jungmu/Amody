@@ -179,6 +179,11 @@ void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
 	bOUTisSuccess = true;
 }
 
+void AUI_Manager::useItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
+{
+
+}
+
 void AUI_Manager::getAmountAtIndex(int index, int &OUTamount)
 {
 	OUTamount = inventorySlot[index].amount;

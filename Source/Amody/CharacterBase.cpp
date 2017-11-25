@@ -15,7 +15,6 @@ ACharacterBase::ACharacterBase()
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -32,3 +31,50 @@ void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
+void ACharacterBase::getSpeed(float &OUTspeed)
+{
+	OUTspeed = userData.speed;
+}
+
+void ACharacterBase::getHp(float &OUThp)
+{
+	OUThp = userData.hp;
+}
+
+void ACharacterBase::setHp(float hp)
+{
+	if (userData.maxHp < hp)
+	{
+		hp = userData.maxHp;
+	}
+
+	userData.hp = hp;
+}
+
+void ACharacterBase::getMp(float &OUTmp)
+{
+	OUTmp = userData.mp;
+}
+
+void ACharacterBase::setMp(float mp)
+{
+	if (userData.maxMp < mp)
+	{
+		mp = userData.maxMp;
+	}
+
+	userData.mp = mp;
+}
+
+
+void ACharacterBase::setUpUserData()
+{
+	FUserSetupData setUpData;
+
+	userData.maxHp = userData.health * setUpData.hpPerHealth;
+	userData.maxMp = userData.energy * setUpData.mpPerEnergy;
+
+	userData.maxDamage = userData.strength * setUpData.maxDamagePerStr;
+	userData.minDamage = userData.agility * setUpData.minDamagePerAgil;
+	userData.magicDamage = userData.intelligence * setUpData.magicDamagePerint;
+}
