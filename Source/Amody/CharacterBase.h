@@ -45,13 +45,26 @@ public:
 		void getHp(float &OUThp);
 
 	UFUNCTION(BlueprintCallable, Category = "userData")
+		void getHpPercent(float &OUThp);
+
+	UFUNCTION(BlueprintCallable, Category = "userData")
 		void setHp(float hp);
+	
+	UFUNCTION(BlueprintCallable, Category = "userData")
+		void addHp(float hp);
 
 	UFUNCTION(BlueprintCallable, Category = "userData")
 		void getMp(float &OUTmp);
 
 	UFUNCTION(BlueprintCallable, Category = "userData")
+		void getMpPercent(float &OUThp);
+
+	UFUNCTION(BlueprintCallable, Category = "userData")
 		void setMp(float mp);
 
-	void setUpUserData();
+	UFUNCTION(BlueprintCallable, Category = "userData")
+		void addMp(float mp);
+
+	UFUNCTION(BlueprintCallable, Category = "userData")
+		void setUpUserData();
 };

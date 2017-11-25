@@ -76,11 +76,12 @@ public:
 		void addItem(AMasterItem* item,int amount, bool &bOUTisSuccess);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-		void useItem(AMasterItem* item, int amount, bool &bOUTisSuccess);
-
-	UFUNCTION(BlueprintCallable, Category = "Inventory")
 		void getAmountAtIndex(int index, int &OUTamount);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+		void useItemAtInventoryIndex(int index, bool &bOUTisSuccess);
 
 	UFUNCTION(BlueprintCallable, Category = "CommonUI")
 		void setVisibleMainUI();
+
+	
 };

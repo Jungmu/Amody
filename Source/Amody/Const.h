@@ -40,34 +40,47 @@ struct FUserData
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		int level;
+		int level = 1;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		float speed;
+		int exp = 0;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		float hp;
+		float speed = 0.4f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		float mp;
+		float hp = 10.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		float maxHp;
+		float mp = 10.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		float maxMp;
+		float hpRecover = 0.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		float maxDamage;
+		float mpRecover =0.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		float minDamage;
+		float maxHp = 10.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		float magicDamage;
+		float maxMp = 10.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
+		float maxDamage = 1.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
+		float minDamage = 1.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
+		float magicDamage = 1.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
+		float defence = 0.0f;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
+		float attackRating = 0.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		int strength;
+		int strength = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		int agility;
+		int agility = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		int intelligence;
+		int intelligence = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		int health;
+		int health = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
-		int energy;
+		int energy = 10;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UserData")
+		int point = 10;
 };
 
 USTRUCT(BlueprintType)

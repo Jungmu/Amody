@@ -72,6 +72,21 @@ void AUI_Manager::getItemInfoAtIndex(int index, bool &bOUTisEmpty, FItemInfo &OU
 	}
 }
 
+void AUI_Manager::useItemAtInventoryIndex(int index, bool &bOUTisSuccess)
+{
+	bool isEmpty = false;
+	isSlotEmpty(index, isEmpty);
+	if (isEmpty)
+	{
+		bOUTisSuccess = false;
+	}
+	else
+	{
+		bOUTisSuccess = true;
+		inventorySlot[index].amount--;
+	}
+}
+
 void AUI_Manager::searchEmptySlot(bool &bOUTisSuccess,int &OUTindex)
 {
 	for(int i = 0; i< inventorySlot.Num();i++)
@@ -177,11 +192,6 @@ void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
 		}
 	}
 	bOUTisSuccess = true;
-}
-
-void AUI_Manager::useItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
-{
-
 }
 
 void AUI_Manager::getAmountAtIndex(int index, int &OUTamount)

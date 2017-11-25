@@ -41,14 +41,30 @@ void ACharacterBase::getHp(float &OUThp)
 	OUThp = userData.hp;
 }
 
+void ACharacterBase::getHpPercent(float &OUThp)
+{
+	OUThp = userData.hp / userData.maxHp;
+}
+
 void ACharacterBase::setHp(float hp)
 {
 	if (userData.maxHp < hp)
 	{
-		hp = userData.maxHp;
+		userData.hp = userData.maxHp;
 	}
+	else if (hp < 0)
+	{
+		userData.hp = 0;
+	}
+	else
+	{
+		userData.hp = hp;
+	}
+}
 
-	userData.hp = hp;
+void ACharacterBase::addHp(float hp)
+{
+	setHp(userData.hp + hp);
 }
 
 void ACharacterBase::getMp(float &OUTmp)
@@ -56,25 +72,60 @@ void ACharacterBase::getMp(float &OUTmp)
 	OUTmp = userData.mp;
 }
 
+void ACharacterBase::getMpPercent(float &OUTmp)
+{
+	OUTmp = userData.mp / userData.maxMp;
+}
+
 void ACharacterBase::setMp(float mp)
 {
 	if (userData.maxMp < mp)
 	{
-		mp = userData.maxMp;
+		userData.mp = userData.maxMp;
 	}
+	else if (mp < 0)
+	{
+		userData.mp = 0;
+	}
+	else
+	{
+		userData.mp = mp;
+	}
+}
 
-	userData.mp = mp;
+void ACharacterBase::addMp(float mp)
+{
+	setMp(userData.mp + mp);
 }
 
 
 void ACharacterBase::setUpUserData()
 {
-	FUserSetupData setUpData;
-
+	FUserSetupData setUpData;	
+		
 	userData.maxHp = userData.health * setUpData.hpPerHealth;
 	userData.maxMp = userData.energy * setUpData.mpPerEnergy;
+	userData.hpRecover = userData.health * setUpData.hpRecoverPerHealth;
+	userData.mpRecover = userData.energy * setUpData.mpRecoverPerEnergy;
 
 	userData.maxDamage = userData.strength * setUpData.maxDamagePerStr;
 	userData.minDamage = userData.agility * setUpData.minDamagePerAgil;
 	userData.magicDamage = userData.intelligence * setUpData.magicDamagePerint;
+	userData.defence = userData.agility * setUpData.defencePerAgil;
+	userData.attackRating = userData.agility * setUpData.attackRatingPerAgil;
+
+	if (userData.maxHp < userData.hp)
+	{
+		userData.hp = userData.maxHp;
+	}
+	if (userData.maxMp < userData.mp)
+	{
+		userData.mp = userData.maxMp;
+	}
+
+	if (userData.level == 1)
+	{
+		userData.hp = userData.maxHp;
+		userData.mp = userData.maxMp;
+	}
 }
