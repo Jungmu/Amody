@@ -109,7 +109,7 @@ void AUI_Manager::useItemAtInventoryIndex(int index, bool &bOUTisSuccess)
 		case EItemCategory::E_Wapwon:
 			if (left)
 			{
-				delete left;
+				left->Destroy();
 			}			
 			left = GetWorld()->SpawnActor<AMasterItem>(FVector(0,0,0), FRotator(0,0,0), SpawnInfo);
 			left->itemInfo = itemInfo;
