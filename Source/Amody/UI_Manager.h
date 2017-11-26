@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Const.h"
 #include "MasterItem.h"
+#include "CharacterBase.h"
 #include "GameFramework/Actor.h"
 #include "UI_Manager.generated.h"
 
@@ -41,6 +42,8 @@ public:
 		int AmountOfSlot = 150;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 		int MaxItemCount = 99;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		int MaxRingAndBraceletCount = 4;
 
 	// Reference UMG Asset in the Editor
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widgets" ,meta = (ExposeOnSpawn))
@@ -58,6 +61,26 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory")
 		TArray<FInventorySlot> inventorySlot;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		AMasterItem* head = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		AMasterItem* amulet = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		AMasterItem* left = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		AMasterItem* right = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		AMasterItem* body = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		AMasterItem* hand = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		AMasterItem* foot = nullptr;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		TArray<AMasterItem*> ring;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
+		TArray<AMasterItem*> bracelet;
+
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 		void isSlotEmpty(int index,  bool &bOUTisEmpty);
@@ -82,6 +105,4 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "CommonUI")
 		void setVisibleMainUI();
-
-	
 };

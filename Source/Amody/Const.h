@@ -12,7 +12,29 @@ enum class EItemCategory : uint8
 {
 	E_Consumeable 	UMETA(DisplayName = "Consumeable"),
 	E_Equipment 	UMETA(DisplayName = "Equipment"),
-	E_Useable		UMETA(DisplayName = "Useable")
+	E_Useable		UMETA(DisplayName = "Useable"),
+
+	E_Wapwon		UMETA(DisplayName = "Wapwon"),
+	E_Head		UMETA(DisplayName = "Head"),
+	E_Body		UMETA(DisplayName = "Body"),
+	E_Hand		UMETA(DisplayName = "Hand"),
+	E_Foot		UMETA(DisplayName = "Foot"),
+	E_Ring		UMETA(DisplayName = "Ring"),
+	E_Amulet		UMETA(DisplayName = "Amulet"),
+	E_Bracelet		UMETA(DisplayName = "Bracelet"),
+
+	E_Hp		UMETA(DisplayName = "Hp"),
+	E_Mp		UMETA(DisplayName = "Mp")
+};
+
+USTRUCT(BlueprintType)
+struct FItemOption
+{
+	GENERATED_USTRUCT_BODY()
+
+	int optionKey;
+	FString optionName;
+	float value;
 };
 
 USTRUCT(BlueprintType)
@@ -32,6 +54,13 @@ struct FItemInfo
 		bool bIsCanStack;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
 		EItemCategory Category;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
+		EItemCategory SubCategory;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
+		int consumeEffectValue;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "ItemInfo")
+		TArray<FItemOption> optionList;
+
 };
 
 USTRUCT(BlueprintType)

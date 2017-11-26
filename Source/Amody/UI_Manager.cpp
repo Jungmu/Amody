@@ -2,6 +2,7 @@
 
 #include "UI_Manager.h"
 #include "Blueprint/UserWidget.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AUI_Manager::AUI_Manager()
@@ -75,16 +76,55 @@ void AUI_Manager::getItemInfoAtIndex(int index, bool &bOUTisEmpty, FItemInfo &OU
 void AUI_Manager::useItemAtInventoryIndex(int index, bool &bOUTisSuccess)
 {
 	bool isEmpty = false;
-	isSlotEmpty(index, isEmpty);
+	FItemInfo itemInfo;
+	int amount;
+	ACharacterBase* playerCharacter = Cast<ACharacterBase>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	getItemInfoAtIndex(index, isEmpty, itemInfo, amount);
 	if (isEmpty)
 	{
 		bOUTisSuccess = false;
+		return;
 	}
-	else
+
+	if (itemInfo.Category == EItemCategory::E_Consumeable)
 	{
-		bOUTisSuccess = true;
-		inventorySlot[index].amount--;
+		switch (itemInfo.SubCategory)
+		{
+		case EItemCategory::E_Hp:
+			playerCharacter->userData.hp += itemInfo.consumeEffectValue;
+			break;
+		case EItemCategory::E_Mp:
+			playerCharacter->userData.mp += itemInfo.consumeEffectValue;
+			break;
+		default:
+			break;
+		}
+		
 	}
+	else if (itemInfo.Category == EItemCategory::E_Equipment)
+	{
+		FActorSpawnParameters SpawnInfo;
+		switch (itemInfo.SubCategory)
+		{
+		case EItemCategory::E_Wapwon:
+			if (left)
+			{
+				delete left;
+			}			
+			left = GetWorld()->SpawnActor<AMasterItem>(FVector(0,0,0), FRotator(0,0,0), SpawnInfo);
+			left->itemInfo = itemInfo;
+			break;
+		default:
+			break;
+		}
+	}
+		
+	inventorySlot[index].amount--;
+	if (inventorySlot[index].amount == 0)
+	{
+		inventorySlot[index].Item->Destroy();
+	}
+	bOUTisSuccess = true;
 }
 
 void AUI_Manager::searchEmptySlot(bool &bOUTisSuccess,int &OUTindex)

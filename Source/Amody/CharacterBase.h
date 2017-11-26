@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "UI_Manager.h"
+#include "Const.h"
 #include "GameFramework/Character.h"
 #include "CharacterBase.generated.h"
 
@@ -32,8 +32,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		bool isUiOpen = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		AUI_Manager* uiManager;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		//AUI_Manager* uiManager;
 		
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FUserData userData;
