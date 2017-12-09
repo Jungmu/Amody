@@ -39,7 +39,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Slot")
-		int AmountOfSlot = 150;
+		int AmountOfSlot = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 		int MaxItemCount = 99;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
@@ -77,9 +77,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
 		AMasterItem* foot = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
-		TArray<AMasterItem*> ring;
+		AMasterItem* ring1 = nullptr;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Equipment")
-		TArray<AMasterItem*> bracelet;
+		AMasterItem* ring2 = nullptr;
 
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")

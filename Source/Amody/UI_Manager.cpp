@@ -108,9 +108,11 @@ void AUI_Manager::useItemAtInventoryIndex(int index, bool &bOUTisSuccess)
 		{
 		case EItemCategory::E_Wapwon:
 			if (left)
-			{
+			{				
+				bool bIsSucceed;
+				addItem(left, 1, bIsSucceed);
 				left->Destroy();
-			}			
+			}
 			left = GetWorld()->SpawnActor<AMasterItem>(FVector(0,0,0), FRotator(0,0,0), SpawnInfo);
 			left->itemInfo = itemInfo;
 			break;
@@ -122,7 +124,7 @@ void AUI_Manager::useItemAtInventoryIndex(int index, bool &bOUTisSuccess)
 	inventorySlot[index].amount--;
 	if (inventorySlot[index].amount == 0)
 	{
-		inventorySlot[index].Item->Destroy();
+		inventorySlot[index].Item = nullptr;
 	}
 	bOUTisSuccess = true;
 }
@@ -208,7 +210,7 @@ void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
 			}
 			else
 			{
-				UE_LOG(LogTemp, Error, TEXT("inventory is full ;;"));
+				UE_LOG(LogTemp, Error, TEXT("inventory is full ;"));
 				bOUTisSuccess = false;
 				return;
 			}
@@ -222,11 +224,14 @@ void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
 			inventorySlot[index].Item = item;
 			inventorySlot[index].amount = 1;
 			amount--;
-			addItem(item, amount, bOUTisSuccess);
+			if (amount > 0)
+			{
+				addItem(item, amount, bOUTisSuccess);
+			}
 		}
 		else
 		{
-			UE_LOG(LogTemp, Error, TEXT("inventory is full ;;"));
+			UE_LOG(LogTemp, Error, TEXT("inventory is full ;"));
 			bOUTisSuccess = false;
 			return;
 		}

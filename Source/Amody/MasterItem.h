@@ -26,4 +26,5 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 		FItemInfo itemInfo;
+	
 };

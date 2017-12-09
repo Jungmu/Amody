@@ -27,15 +27,18 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "userData")
+		UStaticMesh* wapwon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "userData")
 		bool isAttack = false;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "userData")
 		bool isUiOpen = false;
 
 	//UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		//AUI_Manager* uiManager;
 		
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "userData")
 		FUserData userData;
 
 	UFUNCTION(BlueprintCallable, Category = "userData")
