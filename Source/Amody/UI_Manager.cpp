@@ -72,6 +72,10 @@ void AUI_Manager::getItemInfoAtIndex(int index, bool &bOUTisEmpty, FItemInfo &OU
 		OUTitemInfo = FItemInfo();
 	}
 }
+void AUI_Manager::destroyItemAtIndex(int index)
+{
+	inventorySlot[index].Item->Destroy();	
+}
 
 void AUI_Manager::useItemAtInventoryIndex(int index, bool &bOUTisSuccess)
 {
@@ -111,7 +115,6 @@ void AUI_Manager::useItemAtInventoryIndex(int index, bool &bOUTisSuccess)
 			{				
 				bool bIsSucceed;
 				addItem(left, 1, bIsSucceed);
-				left->Destroy();
 			}
 			left = GetWorld()->SpawnActor<AMasterItem>(FVector(0,0,0), FRotator(0,0,0), SpawnInfo);
 			left->itemInfo = itemInfo;
@@ -124,7 +127,7 @@ void AUI_Manager::useItemAtInventoryIndex(int index, bool &bOUTisSuccess)
 	inventorySlot[index].amount--;
 	if (inventorySlot[index].amount == 0)
 	{
-		inventorySlot[index].Item = nullptr;
+		destroyItemAtIndex(index);
 	}
 	bOUTisSuccess = true;
 }
@@ -199,6 +202,7 @@ void AUI_Manager::addItem(AMasterItem* item, int amount, bool &bOUTisSuccess)
 		{
 			int sumAmount = inventorySlot[index].amount + amount;
 			addStackedItem(item, index, sumAmount, bOUTisSuccess);
+			item->Destroy();
 		}
 		else
 		{

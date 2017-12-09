@@ -38,6 +38,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void destroyItemAtIndex(int index);
+	void addStackedItem(AMasterItem* item, int index, int amount, bool &bOUTisSuccess);
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Slot")
 		int AmountOfSlot = 10;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
@@ -94,7 +97,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 		void searchFreeStack(AMasterItem* item, bool &bOUTisSuccess, int &OUTindex);
 
-	void addStackedItem(AMasterItem* item,int index, int amount, bool &bOUTisSuccess);
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 		void addItem(AMasterItem* item,int amount, bool &bOUTisSuccess);
 
