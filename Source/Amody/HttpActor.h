@@ -11,20 +11,22 @@ UCLASS()
 class AMODY_API AHttpActor : public AActor
 {
 	GENERATED_BODY()
+private:
+	// Sets default values for this actor's properties
+	AHttpActor(const class FObjectInitializer& ObjectInitializer);
+
+	static AHttpActor* instance;
 
 public:	
 	FHttpModule* Http;
 
 	/* The actual HTTP call */
 	UFUNCTION(BlueprintCallable)
-		void MyHttpCall();
+		void MyHttpCall(FString url, FString data);
 
 	/*Assign this function to call when the GET request processes sucessfully*/
 	void OnResponseReceived(FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful);
 
-	// Sets default values for this actor's properties
-	AHttpActor(const class FObjectInitializer& ObjectInitializer);
+	static AHttpActor* GetInstance();
 
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;		
 };
